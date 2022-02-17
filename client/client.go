@@ -28,7 +28,7 @@ func NewClient(host string) *client {
 }
 
 func (c *client) FindTopWords(ctx context.Context, req *topword.FindTopWordsRequest) ([]*topword.WordInfo, error) {
-	var form url.Values
+	form := url.Values{}
 	form.Add("text", req.Text)
 
 	res, err := c.httpClient.PostForm(fmt.Sprintf("%s/top-words", c.host), form)
