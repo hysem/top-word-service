@@ -2,8 +2,8 @@ package topword
 
 // WordInfo holds top word detail
 type WordInfo struct {
-	Word  string
-	Count uint64
+	Word  string `json:"word"`
+	Count uint64 `json:"count"`
 }
 
 func (tw *WordInfo) IsLess(tw1 *WordInfo) bool {
