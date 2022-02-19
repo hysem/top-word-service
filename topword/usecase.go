@@ -31,7 +31,7 @@ func (u *usecase) FindTopWords(ctx context.Context, request *FindTopWordsRequest
 		wordCount[word]++
 	}
 
-	// Step 2: create a min heap with capacity N
+	// Step 2: create a heap with capacity N (min heap because of the Less method defined for WordInfo)
 	h := heap.New[*WordInfo](N)
 
 	for word, count := range wordCount {
