@@ -8,6 +8,7 @@ import (
 )
 
 // Usecase interface
+//go:generate mockery --name=Usecase --structname=UsecaseMock --filename=usecase_mock.go --inpackage
 type Usecase interface {
 
 	// FindTopWords finds the top words in the given text using a min heap
