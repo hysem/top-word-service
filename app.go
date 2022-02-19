@@ -9,8 +9,6 @@ import (
 	"github.com/hysem/top-word-service/topword"
 )
 
-const N = 10
-
 func main() {
 	// initialize the dependencies
 	topwordUsecase := topword.NewUsecase()
