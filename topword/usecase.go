@@ -9,6 +9,9 @@ import (
 
 // Usecase interface
 type Usecase interface {
+
+	// FindTopWords finds the top words in the given text using a min heap
+	// If two words have the same count then the word will be selected based on the alphabetic order
 	FindTopWords(ctx context.Context, request *FindTopWordsRequest) []*WordInfo
 }
 
