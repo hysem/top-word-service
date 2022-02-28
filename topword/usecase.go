@@ -35,8 +35,8 @@ func (u *usecase) FindTopWords(ctx context.Context, request *FindTopWordsRequest
 		wordCount[word]++
 	}
 
-	// Step 2: create a heap with capacity N (min heap because of the Less method defined for WordInfo)
-	h := heap.New[*WordInfo](N)
+	// Step 2: create a heap with enough capacity (max heap because of the Less method defined for WordInfo)
+	h := heap.New[*WordInfo](len(wordCount))
 
 	for word, count := range wordCount {
 		w := &WordInfo{
@@ -44,20 +44,11 @@ func (u *usecase) FindTopWords(ctx context.Context, request *FindTopWordsRequest
 			Count: count,
 		}
 
-		// Step 3: Try to push to the heap. If the heap is full Push will return false
-		if !h.Push(w) {
-
-			// Step 4: If the heap is full try comparing the heap top (word with min count) and the current word
-			if minWord, _ := h.Peek(); w.IsLess(minWord) {
-				// Step 5: If true then replace stack top with the current word
-				h.Pop()
-				h.Push(w)
-			}
-		}
+		h.Push(w)
 	}
 
 	topWords := make([]*WordInfo, 0, N)
-	// Step 6: Get the top words from the heap in order; top word will be at the end of the list
+	// Step 3: Get the top words from the heap in order; top word will be at the start of the list
 	for i := 0; i < N; i++ {
 		if w, ok := h.Pop(); ok {
 			topWords = append(topWords, w)
@@ -66,6 +57,6 @@ func (u *usecase) FindTopWords(ctx context.Context, request *FindTopWordsRequest
 		}
 	}
 
-	// Step 7: return the result
+	// Step 4: return the result
 	return topWords
 }

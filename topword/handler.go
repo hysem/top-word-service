@@ -28,7 +28,7 @@ func (h *Handler) FindTopWords(rw http.ResponseWriter, r *http.Request) {
 
 	var request FindTopWordsRequest
 	// Step 2: Get the text from form field data
-	request.Text = r.FormValue("text")
+	request.Text = filter.Replace(r.FormValue("text"))
 
 	// Step 3: Find the top words
 	topWords := h.usecase.FindTopWords(r.Context(), &request)
