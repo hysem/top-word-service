@@ -22,14 +22,14 @@ func newUsecase(t *testing.T) (topword.Usecase, *usecaseMock) {
 func TestUsecase_FindTopWords(t *testing.T) {
 	const testParagraph = "paragraph to test test"
 	var testResponse = []*topword.WordInfo{{
-		Word:  "paragraph",
-		Count: 1,
+		Count: 2,
+		Word:  "test",
 	}, {
 		Word:  "to",
 		Count: 1,
 	}, {
-		Word:  "test",
-		Count: 2,
+		Word:  "paragraph",
+		Count: 1,
 	}}
 	testCases := map[string]struct {
 		expectedResponse []*topword.WordInfo
